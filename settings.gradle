@@ -1,0 +1,5 @@
+rootProject.name = 'Trivago_Kiralama'
+include 'AuthMicroService'
+include 'UserMicroService'
+include 'ProductMicroService'
+
