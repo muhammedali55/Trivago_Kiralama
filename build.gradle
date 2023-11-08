@@ -10,6 +10,7 @@ allprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'application'
     apply plugin: 'java-library'
+    apply from  : "${rootDir}/dependencies.gradle"
 }
 subprojects {
     group = 'com.muhammet'
@@ -31,13 +32,13 @@ allprojects {
         }
     }
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
-        implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
-        annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.5.Final'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation libs.springBootStarterWeb
+        implementation libs.swaggerui
+        compileOnly libs.lombok
+        annotationProcessor libs.lombok
+        implementation libs.mapstruct
+        annotationProcessor libs.mapstructProcessor
+        testImplementation libs.springBootTest
     }
 }
 

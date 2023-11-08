@@ -1,0 +1,30 @@
+ext {
+//    Burada kullanmak istediğimiz bağımlılıkların versiyonlarını ekliyor olacağız.
+//    kullandığımız "versions" tamamen opsiyonel bir isimlendirmedir.
+    versions = [
+            springBoot          : "3.1.5",
+            lombok              : "1.18.30",
+            mapstruct           : "1.5.5.Final",
+            swaggerui           : "2.1.0",
+            postgresql          : "42.6.0"
+    ]
+//    Burada ise eklemek istediğimiz bağımlılıklar için bir liste oluşturuyoruz.
+    libs = [
+
+            springBootStarterWeb       : "org.springframework.boot:spring-boot-starter-web:$versions.springBoot",
+            springBootDataJpa          : "org.springframework.boot:spring-boot-starter-data-jpa:$versions.springBoot",
+            springBootTest             : "org.springframework.boot:spring-boot-starter-test:$versions.springBoot",
+
+            swaggerui                  : "org.springdoc:springdoc-openapi-starter-webmvc-ui:$versions.swaggerui",
+
+            lombok                     : "org.projectlombok:lombok:$versions.lombok",
+
+            mapstruct                  : "org.mapstruct:mapstruct:$versions.mapstruct",
+            mapstructProcessor         : "org.mapstruct:mapstruct-processor:$versions.mapstruct",
+
+            postgresql                 : "org.postgresql:postgresql:$versions.postgresql"
+
+
+    ]
+
+}
