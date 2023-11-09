@@ -21,6 +21,15 @@ public class AuthService {
     private final AuthRepository repository;
 
     public void register(RegisterRequestDto dto){
+        /**
+         * Yeni üye olmak için gelen userName veritabanında kayıtlı olup olmadığını
+         * kontrol ediyoruz. Eğer kullanıcı kayıtlı ise hata fırlatıyoruz.
+         */
+        repository.findOptionalByUserName(dto.getUserName())
+                .ifPresent(auth->{
+                    throw new AuthException(ErrorType.KAYITLI_KULLANICI_ADI);
+                });
+
         Auth auth = AuthMapper.INSTANCE.fromDto(dto);
         auth.setCreateAt(System.currentTimeMillis());
         auth.setUpdateAt(System.currentTimeMillis());
