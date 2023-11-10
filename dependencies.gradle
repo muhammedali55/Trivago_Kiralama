@@ -3,6 +3,7 @@ ext {
 //    kullandığımız "versions" tamamen opsiyonel bir isimlendirmedir.
     versions = [
             springBoot          : "3.1.5",
+            springCloud         : "4.0.4",
             lombok              : "1.18.30",
             mapstruct           : "1.5.5.Final",
             swaggerui           : "2.1.0",
@@ -15,6 +16,8 @@ ext {
             springBootDataJpa          : "org.springframework.boot:spring-boot-starter-data-jpa:$versions.springBoot",
             springBootDataMongoDB      : "org.springframework.boot:spring-boot-starter-data-mongodb:$versions.springBoot",
             springBootTest             : "org.springframework.boot:spring-boot-starter-test:$versions.springBoot",
+
+            springCloudOpenFeign       : "org.springframework.cloud:spring-cloud-starter-openfeign:$versions.springCloud",
 
             swaggerui                  : "org.springdoc:springdoc-openapi-starter-webmvc-ui:$versions.swaggerui",
 

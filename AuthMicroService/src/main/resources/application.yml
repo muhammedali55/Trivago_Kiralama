@@ -10,3 +10,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+
+my-application:
+  user-profile-end-point: "http://localhost:9092/user-profile"
+
+buraya-canimin-istedigini-yazarim:
+  okuyabilirim: "bu nedir ya hu ?"

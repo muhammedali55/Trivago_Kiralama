@@ -2,8 +2,10 @@ package com.muhammet.service;
 
 import com.muhammet.dto.request.LoginRequestDto;
 import com.muhammet.dto.request.RegisterRequestDto;
+import com.muhammet.dto.request.UserProfileSaveRequestDto;
 import com.muhammet.exception.AuthException;
 import com.muhammet.exception.ErrorType;
+import com.muhammet.manager.UserProfileManager;
 import com.muhammet.mapper.AuthMapper;
 import com.muhammet.repository.AuthRepository;
 import com.muhammet.repository.entity.Auth;
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class AuthService {
 
     private final AuthRepository repository;
+    private final UserProfileManager userProfileManager;
 
     public void register(RegisterRequestDto dto){
         /**
@@ -35,6 +38,16 @@ public class AuthService {
         auth.setUpdateAt(System.currentTimeMillis());
         auth.setState(State.AKTIF);
         repository.save(auth);
+        /**
+         * Kullanıcı yeni bir hesap açtığında auth bilgileri kayıt oluyor. Ancak kullanıcı uygulama içinde
+         * UserProfile bilgisi ile hareket edecek. Bu nedenle register işleminde kullanıcının profil bilgilerininde
+         * oluşturulması gerekli.
+         */
+//        userProfileManager.save(UserProfileSaveRequestDto.builder()
+//                        .authId(auth.getId())
+//                        .userName(auth.getUserName())
+//                .build());
+        userProfileManager.save(AuthMapper.INSTANCE.fromAuth(auth));
     }
 
     public boolean login(LoginRequestDto dto){

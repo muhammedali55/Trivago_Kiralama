@@ -8,6 +8,7 @@ import com.muhammet.dto.response.RegisterResponseDto;
 import com.muhammet.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +21,13 @@ import static com.muhammet.constants.RestApiUrls.*;
 public class AuthController {
     private final AuthService authService;
 
+    @Value("${buraya-canimin-istedigini-yazarim.okuyabilirim}")
+    private String ifade;
+
     @PostMapping(REGISTER)
     public ResponseEntity<BaseResponseDto<RegisterResponseDto>> register(@RequestBody @Valid RegisterRequestDto dto){
         authService.register(dto);
+        System.out.println("okunan ifade....: "+ ifade);
         return ResponseEntity.ok(BaseResponseDto.<RegisterResponseDto>builder()
                         .responseCode(200)
                         .data(RegisterResponseDto.builder()
