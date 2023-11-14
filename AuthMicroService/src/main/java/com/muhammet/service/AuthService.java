@@ -9,8 +9,10 @@ import com.muhammet.manager.UserProfileManager;
 import com.muhammet.mapper.AuthMapper;
 import com.muhammet.repository.AuthRepository;
 import com.muhammet.repository.entity.Auth;
+import com.muhammet.utility.JwtTokenManager;
 import com.muhammet.utility.enums.State;
 import lombok.RequiredArgsConstructor;
+import org.antlr.v4.runtime.Token;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,7 +24,7 @@ public class AuthService {
 
     private final AuthRepository repository;
     private final UserProfileManager userProfileManager;
-
+    private final JwtTokenManager jwtTokenManager;
     public void register(RegisterRequestDto dto){
         /**
          * Yeni üye olmak için gelen userName veritabanında kayıtlı olup olmadığını
@@ -50,10 +52,16 @@ public class AuthService {
         userProfileManager.save(AuthMapper.INSTANCE.fromAuth(auth));
     }
 
-    public boolean login(LoginRequestDto dto){
+    public String login(LoginRequestDto dto){
         Optional<Auth> auth = repository.findOptionalByUserNameAndPassword(dto.getUserName(),dto.getPassword());
         if(auth.isEmpty()) throw new AuthException(ErrorType.USERNAME_PASSWORD_ERROR);
-        return true;
+        /**
+         * Kullanıcının authId bilgisi ile token üretiyoruz. Bu token bilgisini döneceğiz.
+         */
+        Optional<String> jwtToken = jwtTokenManager.createToken(auth.get().getId());
+        if(jwtToken.isEmpty())
+            throw new AuthException(ErrorType.TOKEN_ERROR);
+        return jwtToken.get();
     }
 
 }

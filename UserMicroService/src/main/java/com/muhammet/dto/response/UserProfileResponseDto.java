@@ -9,7 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LoginResponseDto {
-    boolean isLogin;
-    String token;
+public class UserProfileResponseDto {
+    String id;
+    String userName;
+    String email;
+    String name;
+    String photo;
+    String phone;
 }

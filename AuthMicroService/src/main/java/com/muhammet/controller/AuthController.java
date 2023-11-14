@@ -39,11 +39,12 @@ public class AuthController {
 
     @PostMapping(LOGIN)
     public ResponseEntity<BaseResponseDto<LoginResponseDto>> login(@RequestBody @Valid LoginRequestDto dto){
-        boolean isLogin = authService.login(dto);
+        String token = authService.login(dto);
         return ResponseEntity.ok(BaseResponseDto.<LoginResponseDto>builder()
                         .responseCode(200)
                         .data(LoginResponseDto.builder()
-                                .isLogin(isLogin)
+                                .isLogin(true)
+                                .token(token)
                                 .build())
                 .build());
     }

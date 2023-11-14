@@ -1,4 +1,4 @@
-package com.muhammet.dto.response;
+package com.muhammet.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LoginResponseDto {
-    boolean isLogin;
+public class UpdateProfiliRequestDto {
     String token;
+    String email;
+    String name;
+    String photo;
+    String phone;
 }
