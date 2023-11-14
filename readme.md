@@ -19,3 +19,8 @@
 ### DOCKER ÜZERİNDE MONGODB KURULUMU
 
     docker run --name mongodb -e "MONGO_INITDB_ROOT_USERNAME=admin" -e "MONGO_INITDB_ROOT_PASSWORD=root" -p 27017:27017 mongo:7.0-rc-jammy
+
+
+### DOCKER POSTGRESQL KURULUMU
+
+     docker run --name postgresdb -e POSTGRES_PASSWORD=root -p 5433:5432 -d postgres
