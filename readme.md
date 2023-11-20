@@ -14,7 +14,7 @@
         roles: ["readWrite", "dbAdmin"]
     })
 
-    -> db.createUser({user: "defaultUSer",pwd: "bilge!*123",roles: ["readWrite", "dbAdmin"]})
+    -> db.createUser({user: "defaultUser",pwd: "bilge!*123",roles: ["readWrite", "dbAdmin"]})
 
 ### DOCKER ÜZERİNDE MONGODB KURULUMU
 
@@ -24,3 +24,8 @@
 ### DOCKER POSTGRESQL KURULUMU
 
      docker run --name postgresdb -e POSTGRES_PASSWORD=root -p 5433:5432 -d postgres
+
+### DİKKAT Mac M1,M2,M3 işlemcilerde docker imaj oluştururken yapıalcak işlem
+
+    --platform linux/amd64 komutu eklenmelidir.
+    docker build -t javaboost2/java11boostauthmicroservice:v003 --platform linux/amd64 .

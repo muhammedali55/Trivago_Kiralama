@@ -22,9 +22,9 @@ public class UserProfileController {
     private final UserProfileService userProfileService;
 
     @PostMapping("/save")
-    public ResponseEntity<Boolean> save(@RequestBody @Valid UserProfileSaveRequestDto dto){
+    public ResponseEntity<Void> save(@RequestBody @Valid UserProfileSaveRequestDto dto){
        UserProfile user =   userProfileService.save(dto);
-       return ResponseEntity.ok(true);
+       return ResponseEntity.ok().build();
     }
 
     @PostMapping("/get-profile")

@@ -4,8 +4,8 @@ server:
 spring:
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: UserProfileDB
-      username: defaultUSer
-      password: "bilge!*123"
+      host: ${MONGO_HOST}
+      port: ${MONGO_PORT}
+      database: ${MONGO_DBNAME}
+      username: ${MONGO_USERNAME}
+      password: ${MONGO_PASSWORD}

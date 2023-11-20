@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(url = "${my-application.user-profile-end-point}",name = "userProfileManager")
 public interface UserProfileManager {
     @PostMapping("/save")
-    ResponseEntity<Boolean> save(@RequestBody @Valid UserProfileSaveRequestDto dto);
+    ResponseEntity<Void> save(@RequestBody @Valid UserProfileSaveRequestDto dto);
 
 
 }
