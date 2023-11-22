@@ -1,21 +1,8 @@
-server:
-  port: 9090
-
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: ${POSTGRES_PASSWORD}
-    url: ${POSTGRES_URL}
-  jpa:
-    hibernate:
-      ddl-auto: update
-
-
-my-application:
-  user-profile-end-point: ${USER_PROFILE_URL}
-  secret-key: "bAjAfl&ato9ruwrichlyUc1Lfaprafr8soNoCr!BramaTR7mojicr1wRI0*oC3is"
-  secret-key-2: ${SECRETKEY}
-
-buraya-canimin-istedigini-yazarim:
-  okuyabilirim: "bu nedir ya hu ?"
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER} #http://localhost:8888
+  config:
+    import: "configserver:"
+  application:
+    name: auth-application

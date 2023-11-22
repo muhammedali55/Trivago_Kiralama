@@ -10,10 +10,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import static com.muhammet.constants.RestApiUrls.*;
 @RestController
 @RequestMapping(AUTH)
@@ -23,6 +21,11 @@ public class AuthController {
 
     @Value("${buraya-canimin-istedigini-yazarim.okuyabilirim}")
     private String ifade;
+
+    @GetMapping("/getmessage")
+    public String getMessage(){
+        return "Bu Auth Servistir";
+    }
 
     @PostMapping(REGISTER)
     public ResponseEntity<BaseResponseDto<RegisterResponseDto>> register(@RequestBody @Valid RegisterRequestDto dto){
