@@ -4,7 +4,7 @@ ext {
     versions = [
             springBoot          : "3.1.5",
             springCloud         : "4.0.4",
-            CircuitBreaker      : "3.0.3"
+            CircuitBreaker      : "3.0.3",
             lombok              : "1.18.30",
             mapstruct           : "1.5.5.Final",
             swaggerui           : "2.1.0",

@@ -5,4 +5,7 @@ buildscript {
 }
 dependencies {
     implementation libs.springCloudGateway
+    implementation libs.springCloudConfigClient
+    implementation libs.springCloudCircuitBreaker
+    implementation libs.springCloudCircuitBreakerReactive
 }
