@@ -28,6 +28,19 @@ public class AuthController {
     }
 
     @PostMapping(REGISTER)
+    /**
+     * Login.html:1 Access to fetch at 'http://34.163.201.190:9090/api/v1/auth/register' from origin
+     * 'http://localhost:63342' has been blocked by CORS policy: Response to preflight request doesn't pass access
+     * control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+     * If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with
+     * CORS disabled.
+     *
+     * DİKKAT!!!
+     * Yukarıda bulunan hata, sunucuya gelen isteği sunucunun dışından bir yerden gelmesi sonucunda oluşan bir hatadır.
+     * bunu aşmak için sınıf,method yada secutiry ayarlarında istek atabilecek end-point leri tanımlamak gereklidir.
+     *
+     */
+    @CrossOrigin("*")
     public ResponseEntity<BaseResponseDto<RegisterResponseDto>> register(@RequestBody @Valid RegisterRequestDto dto){
         authService.register(dto);
         System.out.println("okunan ifade....: "+ ifade);
@@ -41,6 +54,7 @@ public class AuthController {
     }
 
     @PostMapping(LOGIN)
+    @CrossOrigin("*")
     public ResponseEntity<BaseResponseDto<LoginResponseDto>> login(@RequestBody @Valid LoginRequestDto dto){
         String token = authService.login(dto);
         return ResponseEntity.ok(BaseResponseDto.<LoginResponseDto>builder()

@@ -8,6 +8,17 @@ spring:
     name: api-gateway-server
   cloud:
     gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
 # Eğer bir routing işleminde yönlendirme giden yolu tarif etmiyor ise yakaladığı şekilde iletir.
 # yani: http://localhost/auth/getmessage -> http://localhost:9090/auth/getmessage
       routes:
@@ -17,6 +28,7 @@ spring:
           predicates: # ilgili gateway a gelen isteğin kökünden sonra gelen adres irdelenir.
             - Path=/auth/**  # eğer adres /auth ile başlayıp devam ediyor ise bu yönlendirme tarafından yakalanır.
           filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
             - name: CircuitBreaker
               args:
                 fallbackUri: forward:/fallback/auth
@@ -25,6 +37,7 @@ spring:
           predicates:
             - Path=/user/**
           filters:
+            - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
             - name: CircuitBreaker
               args:
                 fallbackUri: forward:/fallback/user
