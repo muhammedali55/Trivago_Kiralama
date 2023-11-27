@@ -7,6 +7,8 @@ import com.muhammet.exception.AuthException;
 import com.muhammet.exception.ErrorType;
 import com.muhammet.manager.UserProfileManager;
 import com.muhammet.mapper.AuthMapper;
+import com.muhammet.rabbitmq.model.CreateUser;
+import com.muhammet.rabbitmq.producer.CreateUserProducer;
 import com.muhammet.repository.AuthRepository;
 import com.muhammet.repository.entity.Auth;
 import com.muhammet.utility.JwtTokenManager;
@@ -25,6 +27,7 @@ public class AuthService {
     private final AuthRepository repository;
     private final UserProfileManager userProfileManager;
     private final JwtTokenManager jwtTokenManager;
+    private final CreateUserProducer createUserProducer;
     public void register(RegisterRequestDto dto){
         /**
          * Yeni üye olmak için gelen userName veritabanında kayıtlı olup olmadığını
@@ -49,7 +52,11 @@ public class AuthService {
 //                        .authId(auth.getId())
 //                        .userName(auth.getUserName())
 //                .build());
-        userProfileManager.save(AuthMapper.INSTANCE.fromAuth(auth));
+       // userProfileManager.save(AuthMapper.INSTANCE.fromAuth(auth));
+        createUserProducer.converdAndSendMessage(CreateUser.builder()
+                        .authId(auth.getId())
+                        .userName(auth.getUserName())
+                .build());
     }
 
     public String login(LoginRequestDto dto){

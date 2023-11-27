@@ -2,6 +2,12 @@ server:
   port: 9090
 
 spring:
+  rabbitmq:
+    host: 34.163.61.189
+    port: 5672
+    username: BilgeAdmin
+    password: BilgeAdam!!**
+
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres

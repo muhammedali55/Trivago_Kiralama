@@ -2,10 +2,19 @@ server:
   port: 9092
 
 spring:
+  amqp:
+    deserialization:
+      trust:
+        all: true
+  rabbitmq:
+    host: 34.163.61.189
+    port: 5672
+    username: BilgeAdmin
+    password: BilgeAdam!!**
   data:
     mongodb:
       host: localhost
       port: 27017
       database: UserProfileDB
-      username: admin
-      password: root
+      username: defaultUser
+      password: bilge!*123
