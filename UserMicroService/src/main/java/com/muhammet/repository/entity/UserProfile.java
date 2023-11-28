@@ -9,12 +9,14 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Document
-public class UserProfile {
+public class UserProfile implements Serializable {
     @Id
     String id;
     Long authId;

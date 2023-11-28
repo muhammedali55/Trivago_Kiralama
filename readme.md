@@ -34,6 +34,10 @@
 
     docker run --name lokalredis -d -p 6379:6379 redis:7.2.3-alpine3.18
 
+### DOCKER ELASTICSEARCH KURULUMU
+
+    docker run -d -p 9200:9200 -p 9300:9300 -e "ES_JAVA_OPTS=-Xms512m -Xmx1024m" -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+
 ###   DOCKER DESKTOP ÜZERİNDE UYGULAMALARIMIZI YÜKLEME KOMUTLARI
     Sırası ile lokalde kurulması gerekenler
     1- docker run --name mongodb -e "MONGO_INITDB_ROOT_USERNAME=admin" -e "MONGO_INITDB_ROOT_PASSWORD=root" -p 27017:27017 mongo:7.0-rc-jammy
