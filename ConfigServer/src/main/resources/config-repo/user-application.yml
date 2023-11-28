@@ -7,10 +7,10 @@ spring:
       trust:
         all: true
   rabbitmq:
-    host: 34.163.61.189
+    host: localhost
     port: 5672
     username: BilgeAdmin
-    password: BilgeAdam!!**
+    password: Aa123456
   data:
     mongodb:
       host: localhost
