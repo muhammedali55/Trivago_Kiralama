@@ -6,6 +6,7 @@ import com.muhammet.dto.request.UserProfileSaveRequestDto;
 import com.muhammet.dto.response.UserProfileResponseDto;
 import com.muhammet.exception.ErrorType;
 import com.muhammet.exception.UserException;
+import com.muhammet.manager.ElasticSearchUserProfileManager;
 import com.muhammet.mapper.UserProfileMapper;
 import com.muhammet.repository.UserProfileRepository;
 import com.muhammet.repository.entity.UserProfile;
@@ -26,9 +27,11 @@ public class UserProfileService {
     private final UserProfileRepository repository;
     private final JwtTokenManager jwtTokenManager;
     private final CacheManager cacheManager;
+    private final ElasticSearchUserProfileManager manager;
     public UserProfile save(UserProfileSaveRequestDto dto){
         UserProfile result = repository.save(UserProfileMapper.INSTANCE.fromDto(dto));
         Objects.requireNonNull(cacheManager.getCache("userprofilefindall")).clear();
+        manager.save(UserProfileMapper.INSTANCE.toUserProfileRequestDto(result));
         return result;
 //        return repository.save(UserProfile.builder()
 //                        .userName(dto.getUserName())
@@ -64,6 +67,7 @@ public class UserProfileService {
         updateProfile.setPhone(dto.getPhone());
         repository.save(updateProfile);
         Objects.requireNonNull(cacheManager.getCache("userprofilefindall")).clear();
+        manager.update(UserProfileMapper.INSTANCE.toUserProfileRequestDto(updateProfile));
         return true;
     }
 

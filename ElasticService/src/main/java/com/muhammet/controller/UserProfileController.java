@@ -1,13 +1,14 @@
 package com.muhammet.controller;
 
 import com.muhammet.dto.request.UserProfileRequestDto;
+import com.muhammet.repository.entity.UserProfile;
 import com.muhammet.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Iterator;
+import java.util.List;
 
 @RestController
 @RequestMapping("/elastic-user-profile")
@@ -27,4 +28,21 @@ public class UserProfileController {
         userProfileService.update(dto);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/find-all")
+    public ResponseEntity<Iterable<UserProfile>> findAll(){
+        return ResponseEntity.ok(userProfileService.findAll());
+    }
+
+    /**
+     *
+     * -> find-by-id -> all fields
+     * -> find-by-id -> only id,username and photo
+     * -> find-by-username
+     * -> find-by-email
+     * -> find-by-phone
+     * -> find-by-username-and-email -> contains
+     *
+     */
+
 }

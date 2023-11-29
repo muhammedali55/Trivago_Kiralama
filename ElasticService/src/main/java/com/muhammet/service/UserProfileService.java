@@ -7,6 +7,8 @@ import com.muhammet.repository.entity.UserProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,4 +38,7 @@ public class UserProfileService {
         }
     }
 
+    public Iterable<UserProfile> findAll() {
+        return  userProfileRepository.findAll();
+    }
 }
