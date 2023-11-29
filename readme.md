@@ -35,8 +35,11 @@
     docker run --name lokalredis -d -p 6379:6379 redis:7.2.3-alpine3.18
 
 ### DOCKER ELASTICSEARCH KURULUMU
+    - xpack.security.enabled=true
 
-    docker run -d -p 9200:9200 -p 9300:9300 -e "ES_JAVA_OPTS=-Xms512m -Xmx1024m" -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.5.2
+    - xpack.security.transport.ssl.enabled=true
+
+    docker run -d -p 9200:9200 -p 9300:9300 -e "xpack.security.enabled=false" -e "xpack.security.transport.ssl.enabled=false"  -e "ELASTIC_USERNAME=admin" -e "ELASTIC_PASSWORD=root" -e "ES_JAVA_OPTS=-Xms512m -Xmx1024m" -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:8.7.1
 
 ###   DOCKER DESKTOP ÜZERİNDE UYGULAMALARIMIZI YÜKLEME KOMUTLARI
     Sırası ile lokalde kurulması gerekenler
