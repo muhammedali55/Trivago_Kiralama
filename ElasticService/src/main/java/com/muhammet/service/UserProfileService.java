@@ -5,6 +5,10 @@ import com.muhammet.mapper.UserProfileMapper;
 import com.muhammet.repository.UserProfileRepository;
 import com.muhammet.repository.entity.UserProfile;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
@@ -46,4 +50,30 @@ public class UserProfileService {
     public UserProfile findById(String id) {
         return userProfileRepository.findById(id).orElse(null);
     }
+
+    /***
+     *
+     * @param page -> Hangi sayfayı görmek istediğinizi belirtir.
+     * @param size -> bir sayfada kaç kayıt görmek istediğinizi belirtir.
+     * @param sortParameter -> hangi parametreye göre sıralama yapmak istediğinizi belirtir. (ad, id, userName)
+     * @param sortDirection -> sıralama yönünü belirtir. (ASC, DESC)
+     * @return
+     */
+    public Page<UserProfile> findAll(int page, int size, String sortParameter, String sortDirection){
+        Pageable pageable;
+        if(sortParameter !=null && !sortParameter.isEmpty()){
+            /**
+             * Sıralama için bir nesne yaratmak,
+             * Sort nesnesi gerekli,
+             * Sort.Direction -> ASC(a...z, 0...9), DESC(z...a, 9...0)
+             */
+            Sort sort =  Sort.by(Sort.Direction.fromString(sortDirection == null ? "ASC" : sortDirection), sortParameter);
+            pageable = PageRequest.of(page, size, sort);
+
+        }else
+            pageable = Pageable.ofSize(size).withPage(page);
+
+        return userProfileRepository.findAll(pageable);
+    }
+
 }
