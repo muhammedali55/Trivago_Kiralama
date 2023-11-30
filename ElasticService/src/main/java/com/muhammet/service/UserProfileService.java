@@ -38,6 +38,7 @@ public class UserProfileService {
         }
     }
 
+
     public Iterable<UserProfile> findAll() {
         return  userProfileRepository.findAll();
     }
