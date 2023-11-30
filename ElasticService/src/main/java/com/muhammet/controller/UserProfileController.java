@@ -4,6 +4,7 @@ import com.muhammet.dto.request.UserProfileRequestDto;
 import com.muhammet.repository.entity.UserProfile;
 import com.muhammet.service.UserProfileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,5 +45,7 @@ public class UserProfileController {
      * -> find-by-username-and-email -> contains
      *
      */
+
+
 
 }

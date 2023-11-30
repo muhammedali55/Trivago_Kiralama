@@ -41,4 +41,8 @@ public class UserProfileService {
     public Iterable<UserProfile> findAll() {
         return  userProfileRepository.findAll();
     }
+
+    public UserProfile findById(String id) {
+        return userProfileRepository.findById(id).orElse(null);
+    }
 }
