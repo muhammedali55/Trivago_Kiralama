@@ -52,5 +52,20 @@ public class UserProfileController {
         return ResponseEntity.ok(userProfileService.findAll(page,size,sortParameter,sortDirection));
     }
 
+    @GetMapping("/get-message")
+    public String getMessage(){
+        return "Elastik Servis";
+    }
+
+    @GetMapping("/get-secret-message")
+    public String getSecretMessage(){
+        return "Elastik Servis:  gizli bir mesaj";
+    }
+
+
+    @GetMapping("/get-user-message")
+    public String getUserMessage(){
+        return "kullanıcının gizli mesajı";
+    }
 
 }
