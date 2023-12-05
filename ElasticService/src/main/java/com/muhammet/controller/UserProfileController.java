@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
@@ -66,6 +67,18 @@ public class UserProfileController {
     @GetMapping("/get-user-message")
     public String getUserMessage(){
         return "kullanıcının gizli mesajı";
+    }
+
+    @GetMapping("/get-ahmet")
+    @PreAuthorize("hasAnyAuthority('Ahmet_Amca','Super_Admin')")
+    public String getAhmetAmcaMesaji(){
+        return "Bugün nasılsın yeğen ?";
+    }
+
+    @GetMapping("/gizli")
+    @PreAuthorize("hasAnyAuthority('GIZLI')")
+    public String getGizliBirMesaj(){
+        return "Çooooookk g*****li bir mesaj";
     }
 
 }

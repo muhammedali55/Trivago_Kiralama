@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
@@ -36,7 +37,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
          * nesnesi oluşturarak Filtenin arasına yerleştiririz.
          */
         String bearer_Token = request.getHeader("Authorization");
-        if(bearer_Token.startsWith("Bearer ")){
+        if(Objects.nonNull(bearer_Token) && bearer_Token.startsWith("Bearer ")){
             // Token okunur.
             String token = bearer_Token.substring(7);
             // Token içinden kullanıcı id si çekilir.

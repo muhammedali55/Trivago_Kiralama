@@ -76,4 +76,7 @@ public class UserProfileService {
         return userProfileRepository.findAll(pageable);
     }
 
+    public Optional<UserProfile> findByAuthId(Long authId) {
+        return userProfileRepository.findOptionalByAuthId(authId);
+    }
 }
