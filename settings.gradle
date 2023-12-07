@@ -6,4 +6,5 @@ include 'ConfigServer'
 include 'ConfigServerGit'
 include 'GatewayServer'
 include 'ElasticService'
+include 'TestModul'
 

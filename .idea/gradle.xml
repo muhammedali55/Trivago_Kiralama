@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/ElasticService" />
             <option value="$PROJECT_DIR$/GatewayServer" />
             <option value="$PROJECT_DIR$/ProductMicroService" />
+            <option value="$PROJECT_DIR$/TestModul" />
             <option value="$PROJECT_DIR$/UserMicroService" />
           </set>
         </option>
