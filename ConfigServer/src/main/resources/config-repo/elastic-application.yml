@@ -13,3 +13,6 @@ spring:
     uris: http://localhost:9200
     username: admin
     password: root
+
+my-application:
+  time: 12-12-2023

@@ -4,26 +4,26 @@ import com.muhammet.dto.request.UserProfileRequestDto;
 import com.muhammet.mapper.UserProfileMapper;
 import com.muhammet.repository.UserProfileRepository;
 import com.muhammet.repository.entity.UserProfile;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class UserProfileService {
+public class UserProfileElasticService {
     private final UserProfileRepository userProfileRepository;
 
-    public UserProfileService(UserProfileRepository userProfileRepository) {
+    public UserProfileElasticService(UserProfileRepository userProfileRepository) {
         this.userProfileRepository = userProfileRepository;
     }
 
     public void save(UserProfileRequestDto dto){
+        if(Objects.isNull(dto.getAuthId()))
+            throw new RuntimeException("Auth id null olamaz");
         userProfileRepository.save(UserProfileMapper.INSTANCE.fromDto(dto));
     }
 

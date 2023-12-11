@@ -1,10 +1,9 @@
 package com.muhammet.config;
 
 import com.muhammet.repository.entity.UserProfile;
-import com.muhammet.service.UserProfileService;
+import com.muhammet.service.UserProfileElasticService;
 import com.muhammet.service.YetkiService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -20,7 +19,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class JwtUserDetails implements UserDetailsService {
-    private final UserProfileService userProfileService;
+    private final UserProfileElasticService userProfileElasticService;
     private final YetkiService yetkiService;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -35,7 +34,7 @@ public class JwtUserDetails implements UserDetailsService {
      * @return
      */
     public UserDetails findByAuthId(Long authId){
-        Optional<UserProfile> userProfile = userProfileService.findByAuthId(authId);
+        Optional<UserProfile> userProfile = userProfileElasticService.findByAuthId(authId);
         if(userProfile.isEmpty()) throw new RuntimeException("Yetkisiz Kullanıcı ");
         List<GrantedAuthority> yetkileri = new ArrayList<>();
         yetkiService.findAllByUserId(userProfile.get().getUserId()).forEach(y->{
